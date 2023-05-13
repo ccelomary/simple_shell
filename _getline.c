@@ -16,28 +16,6 @@ size_t find_next_newline(char *buffer, size_t length)
 		position++;
 	return (position);
 }
-
-/**
- * copy_to_line - function that copy data into line
- *
- * @line: line that will recieve characters
- * @buffer: buffer source of the characters
- * @size: length of data that will be copied into line
- * Return: line
- */
-char *copy_to_line(char *line, char *buffer, size_t size)
-{
-	size_t iter;
-
-	iter = 0;
-	while (iter < size)
-	{
-		line[iter] = buffer[iter];
-		iter++;
-	}
-	return (line);
-}
-
 /**
  * _getline - function takes address of line to fill with characters
  *
@@ -72,7 +50,7 @@ ssize_t _getline(char **line)
 		*line = _realloc(*line, old_size, old_size + next_newline);
 		if (!*line)
 			return (-1);
-		copy_to_line((*line) + old_size, buffer + current_position, next_newline);
+		_copy((*line) + old_size, buffer + current_position, next_newline);
 		old_size += next_newline;
 		current_position += next_newline;
 		if (current_position < end_of_buffer)
