@@ -1,6 +1,14 @@
 #include "shell.h"
 #include <stdio.h>
 
+/**
+ * check_diameter - functions that look up for next diameter
+ *
+ * @str: string
+ * @diameter: diameter that will be used when splitting
+ * Return: 0 if the str doesn't contain diameter, 1 when diameter found
+ * 2 when diameter found in but followed by last character of the diameter
+ */
 int check_diameter(char *str, char *diameter)
 {
 	size_t iter;
@@ -15,6 +23,14 @@ int check_diameter(char *str, char *diameter)
 	return (1);
 }
 
+/**
+ * backet_count - function calculate number of
+ * backets that is splited by diameter
+ *
+ * @line: buffer to look up in
+ * @diameter: buffer to look up for
+ * Return:  number of backets
+ */
 size_t backet_count(char *line, char *diameter)
 {
 	size_t counter, index, before, is_diameter;
@@ -49,6 +65,14 @@ size_t backet_count(char *line, char *diameter)
 	return (counter + 1);
 }
 
+/**
+ * get_next_diameter - function return the start of
+ * the next occurance of  diameter
+ *
+ * @line: buffer to look up in
+ * @diameter: buffer to look up for
+ * Return: position of the next occurance of the diameter
+ */
 size_t get_next_diameter(char *line, char *diameter)
 {
 	size_t index, before, is_diameter;
@@ -78,7 +102,15 @@ size_t get_next_diameter(char *line, char *diameter)
 	}
 	return (index);
 }
-
+/**
+ * free_backets - function that frees backets
+ * in case of error
+ *
+ * @backets: 2d array that will be freed
+ * @current_position: refer to the last index before
+ * error occurs
+ * Return: void
+ */
 void free_backets(char **backets, size_t current_position)
 {
 	size_t index;
@@ -91,7 +123,15 @@ void free_backets(char **backets, size_t current_position)
 	}
 	free(backets);
 }
-
+/**
+ * _split - function that splits given line by
+ * given diameter
+ *
+ * @line: buffer to be splitted
+ * @diameter: to split with
+ * Return: 2d array that ends with NULL
+ * or NULL in case of error
+ */
 char **_split(char *line, char *diameter)
 {
 	char **backets;
