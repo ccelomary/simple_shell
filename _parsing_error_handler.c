@@ -12,10 +12,12 @@ int _check_invalid_characters_occurance(char *line)
 	size_t index, iter, iter2;
 	char *invalid_characters[] = {
 		";;",
-		"|||"};
+		"|||",
+		">>>",
+		"<<"};
 
 	index = 0;
-	while (index < 2)
+	while (index < 4)
 	{
 		iter = 0;
 		iter2 = 0;
@@ -52,7 +54,8 @@ int _parsing_error_handler(char *line)
 		return (0);
 	len = _strlen(line);
 	if (line[0] == ';' || line[0] == '|' ||
-		line[len - 1] == ';' || line[len - 1] == '|')
+		line[len - 1] == '|' ||
+		line[len - 1] == '>' || line[len - 1] == '<')
 		return (2);
 	len = 0;
 	while (line[len])

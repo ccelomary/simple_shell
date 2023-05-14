@@ -8,16 +8,30 @@
 #define BUFFER_SIZE 1024
 
 /**
-* struct list_s - node of linkedlist
-*
-* @data: linkedlist content
-* @next: next node
-*/
+ * struct list_s - node of linkedlist
+ *
+ * @data: linkedlist content
+ * @next: next node
+ */
 typedef struct list_s
 {
 	void *data;
 	struct list_s *next;
 } list_t;
+/**
+ * struct command_s - struct that holds informations
+ * about command
+ *
+ * @name: name of the command
+ * @arguments: command arguments
+ * @files: command files
+ *
+ */
+typedef struct command_s
+{
+	char *name;
+	char **arguments;
+} command_t;
 
 char *_copy(char *dest, char *src, size_t size);
 void *_realloc(void *old_buffer, size_t old_size, size_t new_size);
@@ -31,4 +45,6 @@ void _free_split(char ***backets);
 list_t *add_to_list(list_t **lst, void *data);
 void *pop_from_list(list_t **list);
 void free_list(list_t *list, void (*free_content)(void *data));
+int _strcmp(const char *str1, const char *str2);
+int _inset(char *str, char *set[], size_t set_length);
 #endif
