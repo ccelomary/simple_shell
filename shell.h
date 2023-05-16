@@ -75,6 +75,6 @@ map_t *_init_map(void);
 int    _set_value(map_t  *map, const char *key, const char *value);
 char  *_get_value(const map_t *map, const char *key);
 void    _clear_entry(void *data);
-char  *_get_value(const map_t *map, const char *key);
+void    _clear_map(map_t *map);
 list_t    *_get_keys(const map_t *map);
 #endif
