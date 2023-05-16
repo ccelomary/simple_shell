@@ -7,7 +7,7 @@
  * @size: length of data that will be copied into line
  * Return: dest
  */
-char *_copy(char *dest, char *src, size_t size)
+char *_copy(char *dest, const char *src, size_t size)
 {
 	size_t iter;
 

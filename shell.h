@@ -39,58 +39,6 @@ typedef enum status_actions_e
 } status_actions_t;
 
 /**
- * enum status_actions_e - actions that will be applied to
- * status state management
- *
- * @UPDATE_STATUS: action to update status code
- * @GET_STATUS: action to retrieve status code
- */
-typedef enum status_actions_e
-{
-	UPDATE_STATUS,
-	GET_STATUS,
-} status_actions_t;
-
-/**
- * enum status_actions_e - actions that will be applied to
- * status state management
- *
- * @UPDATE_STATUS: action to update status code
- * @GET_STATUS: action to retrieve status code
- */
-typedef enum status_actions_e
-{
-	UPDATE_STATUS,
-	GET_STATUS,
-} status_actions_t;
-
-/**
- * enum status_actions_e - actions that will be applied to
- * status state management
- *
- * @UPDATE_STATUS: action to update status code
- * @GET_STATUS: action to retrieve status code
- */
-typedef enum status_actions_e
-{
-	UPDATE_STATUS,
-	GET_STATUS,
-} status_actions_t;
-
-/**
- * enum status_actions_e - actions that will be applied to
- * status state management
- *
- * @UPDATE_STATUS: action to update status code
- * @GET_STATUS: action to retrieve status code
- */
-typedef enum status_actions_e
-{
-	UPDATE_STATUS,
-	GET_STATUS,
-} status_actions_t;
-
-/**
  * struct list_s - node of linkedlist
  *
  * @data: linkedlist content
@@ -126,14 +74,14 @@ typedef struct map_s
 	list_t *backets[BACKET_SIZE];
 } map_t;
 
-char *_copy(char *dest, char *src, size_t size);
+char *_copy(char *dest, const char *src, size_t size);
 void *_realloc(void *old_buffer, size_t old_size, size_t new_size);
 ssize_t _getline(char **line);
-char *_trim_white_space(char *line);
+char *_trim_white_space(const char *line);
 int _parsing_error_handler(char *line);
 size_t _strlen(const char *s);
 void _free_split(char ***backets);
-char **_split(char *line, char *diameter);
+char **_split(const char *line, const char *diameter);
 list_t *add_to_list(list_t **lst, void *data);
 void *pop_from_list(list_t **list);
 int _listlen(list_t *list);
@@ -150,9 +98,9 @@ void _clear_map(map_t *map);
 list_t *_get_keys(const map_t *map);
 command_t *_init_command(char **tokens);
 void _free_command(void *data);
-command_t *_handle_command(char *command_line);
-int _semicolon_handler(char *line);
-list_t *_pipe_handler(char *semi_command);
+command_t *_handle_command(const char *line);
+int _semicolon_handler(const char *line);
+list_t *_pipe_handler(const char *line);
 int _handle_pipe_execution(list_t *pipes, int previous_stdin);
 int _status_management(status_actions_t action, int new_status);
 void _handle_sigint(int sig);
