@@ -65,6 +65,19 @@ typedef enum status_actions_e
 } status_actions_t;
 
 /**
+ * enum status_actions_e - actions that will be applied to
+ * status state management
+ *
+ * @UPDATE_STATUS: action to update status code
+ * @GET_STATUS: action to retrieve status code
+ */
+typedef enum status_actions_e
+{
+	UPDATE_STATUS,
+	GET_STATUS,
+} status_actions_t;
+
+/**
  * struct list_s - node of linkedlist
  *
  * @data: linkedlist content
