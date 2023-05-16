@@ -16,7 +16,7 @@ int _inset(char *str, char *set[], size_t set_length)
 	index = 0;
 	while (index < set_length)
 	{
-		if (strcmp(str, set[index]))
+		if (_strcmp(str, set[index]))
 			return (1);
 		index++;
 	}

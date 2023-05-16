@@ -1,6 +1,6 @@
 #include "shell.h"
 /**
- * copy_to_line - function that copy data into dest
+ * _copy - function that copy data into dest
  *
  * @dest: buffer in which the data will be copied
  * @src: buffer source of the characters

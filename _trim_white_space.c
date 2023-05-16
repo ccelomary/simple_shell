@@ -50,10 +50,10 @@ char *_get_newline_without_space_dup(char *line, size_t end)
 	is_space = 0;
 	index = 0;
 	newline = malloc(sizeof(char) *
-					 (_get_length_without_space_dup(line, end) + 1));
+					 (_get_length_without_space_dup(line, end + 1) + 1));
 	if (!newline)
 		return (NULL);
-	while (start < end)
+	while (start <= end)
 	{
 		if (line[start] == ' ' && !is_space)
 		{
