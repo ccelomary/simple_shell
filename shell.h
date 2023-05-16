@@ -45,6 +45,18 @@ typedef struct map_s
 	list_t  *backets[BACKET_SIZE];
 }  map_t;
 
+/**
+* struct list_s - node of linkedlist
+*
+* @data: linkedlist content
+* @next: next node
+*/
+typedef struct list_s
+{
+	void *data;
+	struct list_s *next;
+} list_t;
+
 char *_copy(char *dest, char *src, size_t size);
 void *_realloc(void *old_buffer, size_t old_size, size_t new_size);
 ssize_t _getline(char **line);
@@ -66,4 +78,3 @@ void    _clear_entry(void *data);
 char  *_get_value(const map_t *map, const char *key);
 list_t    *_get_keys(const map_t *map);
 #endif
-
