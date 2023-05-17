@@ -12,11 +12,16 @@ void prompt()
 	write(1, "$> ", 3);
 }
 
-int main(void)
+int main(int ac, char *av[], char **env)
 {
 	char *line;
 
 	signal(SIGINT, _handle_sigint);
+	_enviroment_management(INIT_ENV, NULL, NULL);
+	_feed_enviroment_variable(env);
+	char *path = _enviroment_management(GET_VALUE, "PATH", NULL);
+	printf("%s\n", path);
+	free(path);
 	while (1)
 	{
 		prompt();
@@ -24,9 +29,10 @@ int main(void)
 		if (!line || _strcmp(line, "exit") || _parsing_error_handler(line))
 		{
 			free(line);
-			return (1);
+			break;
 		}
 		_semicolon_handler(line);
+		printf("current Status %d\n", _status_management(GET_STATUS, 0));
 		free(line);
 	}
 	return (0);

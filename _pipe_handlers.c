@@ -82,6 +82,7 @@ int _handle_pipe_execution(list_t *pipes, int prev_infd)
 			close(prev_infd);
 		_handle_pipe_execution(pipes->next, fd[0]);
 		waitpid(pid, &status, 0);
+		_status_management(UPDATE_STATUS, WEXITSTATUS(status));
 	}
 	return (1);
 }

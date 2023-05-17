@@ -74,6 +74,29 @@ typedef struct map_s
 	list_t *backets[BACKET_SIZE];
 } map_t;
 
+/**
+ * enum enviroment_action_e - actions that will be applied to
+ * global enviroment
+ *
+ * @INIT_ENV: TO INITIALIZE ENVIROMENT VARIABLE
+ * @SET_ENTRY: TO ADD NEW ENTRY TO ENVIROMENT VARIABLE
+ * @GET_VALUE: TO RETRIEVE VALUE FROM ENVIROMENT VARIABLE
+ * @GET_KEYS: TO GET ALL KEY THAT STORED INSIDE ENV VARIABLE
+ * @CONVERT_INTO_2D: RETURNS 2D ARRAY CONTAINING ALL ENVIRONEMENT
+ * VARIBALES (env)
+ * @CLEAR_ENV: TO FREE AND CLEAR EVERYTHING INSIDE OF OUR
+ * ENV
+ */
+typedef enum enviroment_action_e
+{
+	INIT_ENV,
+	SET_ENTRY,
+	GET_VALUE,
+	GET_KEYS,
+	CONVERT_INTO_2D,
+	CLEAR_ENV,
+} enviroment_action_t;
+
 char *_copy(char *dest, const char *src, size_t size);
 void *_realloc(void *old_buffer, size_t old_size, size_t new_size);
 ssize_t _getline(char **line);
@@ -84,7 +107,7 @@ void _free_split(char ***backets);
 char **_split(const char *line, const char *diameter);
 list_t *add_to_list(list_t **lst, void *data);
 void *pop_from_list(list_t **list);
-int _listlen(list_t *list);
+size_t _listlen(const list_t *list);
 void free_list(list_t *list, void (*free_content)(void *data));
 int _strcmp(const char *str1, const char *str2);
 int _inset(char *str, char *set[], size_t set_length);
@@ -104,6 +127,11 @@ list_t *_pipe_handler(const char *line);
 int _handle_pipe_execution(list_t *pipes, int previous_stdin);
 int _status_management(status_actions_t action, int new_status);
 void _handle_sigint(int sig);
+void *_enviroment_management(enviroment_action_t action,
+							 const char *key, const char *value);
+int _status_management(status_actions_t action, int new_status);
+char **_convert_env_into_2d_array(void);
+void _feed_enviroment_variable(char **new_env);
 char *_strslice(char *line, int start, int end);
 char *_strcat(const char *str1, const char *str2);
 char *_itoa(int number);
