@@ -24,7 +24,7 @@ int main(int ac, char *av[], char **env)
 	_global_states(SET_SHELL_NAME, av[0]);
 	while (1)
 	{
-		prompt();
+		_prompt();
 		_getline(&line);
 		_global_states(SET_LINE, line);
 		_global_states(INCREMENT_LINE_NUMBER, NULL);
