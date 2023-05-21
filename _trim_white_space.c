@@ -82,11 +82,9 @@ char *_get_newline_without_space_dup(const char *line, size_t end)
  */
 char *_trim_white_space(const char *line)
 {
-	size_t left, right, new_length;
-	int is_space;
+	size_t left, right;
 
 	left = 0;
-	is_space = 0;
 	right = _strlen(line) - 1;
 	while (line[left] == ' ')
 		left++;

@@ -11,22 +11,38 @@
 int _semicolon_handler(const char *line)
 {
 	char **semi_commands, **iterator;
-	list_t *pipes;
-	int execution_ret;
+	command_t *command;
+	int argument_length;
 
 	iterator = semi_commands = _split(line, ";");
 	if (!iterator)
 		return (1);
 	while (*iterator)
 	{
-		pipes = _pipe_handler(*iterator);
-		if (!pipes)
-			return (0);
-		execution_ret = _handle_pipe_execution(pipes, 0);
-		free_list(pipes, _free_command);
-		if (!execution_ret)
-			return (1);
+		command = _handle_command(*iterator);
+		if (command->type == NOT_FOUND)
+		{
+			_fprint(2, "%s: %d: %s: not found\n",
+					(char *)_global_states(GET_SHELL_NAME, NULL),
+					*((int *)_global_states(GET_LINE_NUMBER, NULL)),
+					command->name);
+			_status_management(UPDATE_STATUS, 127);
+		}
+		else if (command->type == EXTERNAL)
+			_excute(command);
+		else
+		{
+			_status_management(UPDATE_STATUS,
+							   _builtin_management(
+								   GET_BUILTIN,
+								   command->name, NULL)(command));
+		}
+		argument_length = _str2dlen(command->arguments);
+		_enviroment_management(SET_ENTRY, "_",
+							   command->arguments[argument_length - 1]);
+		_free_command(command);
 		iterator++;
 	}
 	_free_split(&semi_commands);
+	return (0);
 }

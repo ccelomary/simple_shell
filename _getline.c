@@ -42,7 +42,7 @@ ssize_t _getline(char **line)
 				*line = NULL;
 				return (-1);
 			}
-			if (end_of_buffer == 0 && !old_size)
+			if (end_of_buffer == 0)
 				return (old_size);
 		}
 		next_newline = find_next_newline(buffer + current_position,

@@ -11,7 +11,7 @@ char **_convert_env_into_2d_array(void)
 	list_t *keys, *iterator;
 	size_t len_iter;
 	char **array;
-	char *tmp;
+	char *tmp[2];
 
 	iterator = keys = _enviroment_management(GET_KEYS, NULL, NULL);
 	len_iter = _listlen(keys);
@@ -25,12 +25,13 @@ char **_convert_env_into_2d_array(void)
 	len_iter = 0;
 	while (iterator)
 	{
-		tmp = _strcat(iterator->data, "=");
-		array[len_iter] = _strcat(tmp,
-								  _enviroment_management(GET_VALUE,
-														 iterator->data,
-														 NULL));
-		free(tmp);
+		tmp[0] = _strcat(iterator->data, "=");
+		tmp[1] = _enviroment_management(GET_VALUE,
+										iterator->data,
+										NULL);
+		array[len_iter] = _strcat(tmp[0], tmp[1]);
+		free(tmp[0]);
+		free(tmp[1]);
 		iterator = iterator->next;
 		len_iter++;
 	}

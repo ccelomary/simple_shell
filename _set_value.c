@@ -9,11 +9,11 @@
  *@value: string implies to value of the entry
  *Return: 0 on error, 1 success
  */
-int    _set_value(map_t  *map, const char *key, const char *value)
+int _set_value(map_t *map, const char *key, const char *value)
 {
-	int    backet_index;
+	int backet_index;
 	list_t *iterator;
-	entry_t  *entry;
+	entry_t *entry;
 
 	backet_index = _get_hash_code(key);
 	iterator = map->backets[backet_index];

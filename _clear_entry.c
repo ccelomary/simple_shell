@@ -7,9 +7,9 @@
  *
  * Return: nothing
  */
-void    _clear_entry(void *data)
+void _clear_entry(void *data)
 {
-	entry_t  *entry;
+	entry_t *entry;
 
 	entry = data;
 	free(entry->key);

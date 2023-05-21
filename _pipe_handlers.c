@@ -43,6 +43,36 @@ void _close_fdpipe(int fd[2])
 }
 
 /**
+ * _child_process - function that execute child process
+ *
+ * @pipes: node of the linked list contains the command
+ * @prev_infd: previous input file descriptor
+ * @fd: pipe file descriptors
+ * Return: Nothing
+ */
+void _child_process(list_t *pipes, int prev_infd, int fd[2])
+{
+	command_t *command;
+
+	command = pipes->data;
+	close(fd[0]);
+	dup2(prev_infd, 0);
+	if (pipes->next)
+		dup2(fd[1], 1);
+	if (command->type == EXTERNAL || command->type == NOT_FOUND)
+	{
+		execve(command->name, command->arguments, __environ);
+		perror(_enviroment_management(GET_VALUE, "_", NULL));
+		exit(errno);
+	}
+	if (command->type == BUILTINS)
+	{
+		exit(((int (*)(command_t *))_builtin_management(
+			GET_BUILTIN,
+			command->name, NULL))(command));
+	}
+}
+/**
  * _handle_pipe_execution - function executes given commands
  * that were splited by pipe
  *
@@ -54,7 +84,6 @@ void _close_fdpipe(int fd[2])
 int _handle_pipe_execution(list_t *pipes, int prev_infd)
 {
 	int fd[2], pid, status;
-	command_t *command;
 
 	if (!pipes)
 		return (1);
@@ -66,15 +95,7 @@ int _handle_pipe_execution(list_t *pipes, int prev_infd)
 		return (0);
 	}
 	if (!pid)
-	{
-		command = pipes->data;
-		close(fd[0]);
-		dup2(prev_infd, 0);
-		if (pipes->next)
-			dup2(fd[1], 1);
-		execve(command->name, command->arguments, __environ);
-		exit(errno);
-	}
+		_child_process(pipes, prev_infd, fd);
 	else
 	{
 		close(fd[1]);
@@ -82,7 +103,8 @@ int _handle_pipe_execution(list_t *pipes, int prev_infd)
 			close(prev_infd);
 		_handle_pipe_execution(pipes->next, fd[0]);
 		waitpid(pid, &status, 0);
-		_status_management(UPDATE_STATUS, WEXITSTATUS(status));
+		if (!pipes->next)
+			_status_management(UPDATE_STATUS, WEXITSTATUS(status));
 	}
 	return (1);
 }

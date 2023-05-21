@@ -6,7 +6,7 @@
  *@map: map to be freed
  * Return: nothing
  */
-void    _clear_map(map_t *map)
+void _clear_map(map_t *map)
 {
 	int iterator;
 
