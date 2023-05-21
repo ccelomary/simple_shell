@@ -1,5 +1,4 @@
 #include "shell.h"
-#include <stdio.h>
 
 /**
  * check_diameter - functions that look up for next diameter
@@ -38,6 +37,8 @@ size_t backet_count(const char *line, const char *diameter)
 	counter = 0;
 	index = 0;
 	before = 0;
+	if (!*line)
+		return (0);
 	while (line[index])
 	{
 		is_diameter = check_diameter(line + index, diameter);
@@ -102,6 +103,7 @@ size_t get_next_diameter(const char *line, const char *diameter)
 	}
 	return (index);
 }
+
 /**
  * free_backets - function that frees backets
  * in case of error

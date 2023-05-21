@@ -26,13 +26,13 @@ int main(int ac, char *av[], char **env)
 	{
 		_prompt();
 		_getline(&line);
-		_global_states(SET_LINE, line);
-		_global_states(INCREMENT_LINE_NUMBER, NULL);
-		if (!line || _parsing_error_handler(line))
+		if (!line)
 		{
 			free(line);
 			break;
 		}
+		_global_states(SET_LINE, line);
+		_global_states(INCREMENT_LINE_NUMBER, NULL);
 		_semicolon_handler(line);
 		free(line);
 	}
