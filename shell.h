@@ -64,4 +64,5 @@ char  *_get_value(const map_t *map, const char *key);
 void    _clear_entry(void *data);
 void    _clear_map(map_t *map);
 list_t    *_get_keys(const map_t *map);
+int _get_comment_position(const char *line);
 #endif
