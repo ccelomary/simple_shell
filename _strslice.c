@@ -9,7 +9,7 @@
  * @end: end position index zero based(excluded)
  * Return: part of the string
  */
-char *_strslice(char *line, int start, int end)
+char *_strslice(const char *line, int start, int end)
 {
 	char *slice;
 	int len, iter;

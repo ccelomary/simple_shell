@@ -10,7 +10,7 @@
  */
 int main(int ac, char *av[], char **env)
 {
-	char *line;
+	char *line, *no_comment_line;
 
 	(void)ac;
 	signal(SIGINT, _handle_sigint);
@@ -31,6 +31,9 @@ int main(int ac, char *av[], char **env)
 			free(line);
 			break;
 		}
+		no_comment_line = _exclude_comment(line);
+		free(line);
+		line = no_comment_line;
 		_global_states(SET_LINE, line);
 		_global_states(INCREMENT_LINE_NUMBER, NULL);
 		_semicolon_handler(line);
