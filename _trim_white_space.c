@@ -17,12 +17,15 @@ size_t _get_length_without_space_dup(const char *line, size_t end)
 	len = 0;
 	while (start < end)
 	{
-		if (line[start] == ' ' && !is_space)
+		if ((line[start] == ' ' ||
+			 line[start] == '\t') &&
+			!is_space)
 		{
 			len++;
 			is_space = 1;
 		}
-		else if (line[start] != ' ')
+		else if (line[start] != ' ' &&
+				 line[start] != '\t')
 		{
 			is_space = 0;
 			len++;
@@ -55,13 +58,16 @@ char *_get_newline_without_space_dup(const char *line, size_t end)
 		return (NULL);
 	while (start <= end)
 	{
-		if (line[start] == ' ' && !is_space)
+		if ((line[start] == ' ' ||
+			 line[start] == '\t') &&
+			!is_space)
 		{
-			newline[index] = line[start];
+			newline[index] = ' ';
 			index++;
 			is_space = 1;
 		}
-		else if (line[start] != ' ')
+		else if (line[start] != ' ' &&
+				 line[start] != '\t')
 		{
 			is_space = 0;
 			newline[index] = line[start];
@@ -83,12 +89,20 @@ char *_get_newline_without_space_dup(const char *line, size_t end)
 char *_trim_white_space(const char *line)
 {
 	size_t left, right;
+	char *s;
 
 	left = 0;
 	right = _strlen(line) - 1;
-	while (line[left] == ' ')
+	while (line[left] == ' ' || line[left] == '\t')
 		left++;
-	while (right > left && line[right] == ' ')
+	while (right > left &&
+		   (line[right] == ' ' || line[right] == '\t'))
 		right--;
+	if (left >= right)
+	{
+		s = malloc(sizeof(char));
+		*s = 0;
+		return (s);
+	}
 	return (_get_newline_without_space_dup(line + left, right - left));
 }

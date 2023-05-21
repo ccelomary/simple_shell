@@ -31,6 +31,9 @@ int main(int ac, char *av[], char **env)
 			free(line);
 			break;
 		}
+		no_comment_line = _trim_white_space(line);
+		free(line);
+		line = no_comment_line;
 		no_comment_line = _exclude_comment(line);
 		free(line);
 		line = no_comment_line;
