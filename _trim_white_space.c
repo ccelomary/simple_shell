@@ -7,7 +7,7 @@
  * @end: the end of the line
  * Return: length
  */
-size_t _get_length_without_space_dup(char *line, size_t end)
+size_t _get_length_without_space_dup(const char *line, size_t end)
 {
 	size_t start, len;
 	int is_space;
@@ -40,7 +40,7 @@ size_t _get_length_without_space_dup(char *line, size_t end)
  * @end: the end of the string exculding last spaces
  * Return: new string
  */
-char *_get_newline_without_space_dup(char *line, size_t end)
+char *_get_newline_without_space_dup(const char *line, size_t end)
 {
 	size_t start, index;
 	int is_space;
@@ -50,10 +50,10 @@ char *_get_newline_without_space_dup(char *line, size_t end)
 	is_space = 0;
 	index = 0;
 	newline = malloc(sizeof(char) *
-					 (_get_length_without_space_dup(line, end) + 1));
+					 (_get_length_without_space_dup(line, end + 1) + 1));
 	if (!newline)
 		return (NULL);
-	while (start < end)
+	while (start <= end)
 	{
 		if (line[start] == ' ' && !is_space)
 		{
@@ -80,13 +80,11 @@ char *_get_newline_without_space_dup(char *line, size_t end)
  * @line: to check against
  * Return: newline without space duplicates
  */
-char *_trim_white_space(char *line)
+char *_trim_white_space(const char *line)
 {
-	size_t left, right, new_length;
-	int is_space;
+	size_t left, right;
 
 	left = 0;
-	is_space = 0;
 	right = _strlen(line) - 1;
 	while (line[left] == ' ')
 		left++;

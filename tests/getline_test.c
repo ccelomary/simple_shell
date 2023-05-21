@@ -12,7 +12,7 @@ int main(void)
 		ret = _getline(&line);
 		if (!line)
 			break;
-		printf("%s\n", line);
+		printf("-> %s\n", line);
 		free(line);
 	}
 	return (0);

@@ -3,7 +3,7 @@
 
 int main(void)
 {
-	char **s = _split("hello||world|again|and&&again&&", "&&");
+	char **s = _split("echo hello world > file | ls -la ns; echo hello world | hi mmm", "|");
 	char **v = s;
 	while (*v)
 	{

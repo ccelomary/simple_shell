@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
-  * _get_hash_code - calculates the hash code for a given key.
-  *
-  * @key: key to be hash
-  *
-  * Return: return an integer signify hashed code of the given key‏
-  */
+ * _get_hash_code - calculates the hash code for a given key.
+ *
+ * @key: key to be hash
+ *
+ * Return: return an integer signify hashed code of the given key
+ */
 int _get_hash_code(const char *key)
 {
 	int hash = 0;

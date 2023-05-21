@@ -5,12 +5,12 @@
  * @s: string (characters)
  * Return: number of characters
  */
-size_t _strlen(char *s)
+size_t _strlen(const char *s)
 {
 	size_t len;
 
 	len = 0;
-	while (s[len])
+	while (s && s[len])
 		len++;
 	return (len);
 }
