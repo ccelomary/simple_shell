@@ -9,8 +9,8 @@ The ALX software engineering project involves implementing a simple shell, which
 - to compile use 
   - ```gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh```
 - there are two way to use the shell
-    - by passing the commands through pipe ```echo "ls -la" | ./hsh```
-    - simple execution ```./hsh```
+    - non interactive mode: ```echo "ls -la" | ./hsh```
+    - interactive mode: ```./hsh```
 -  we used valgrind to check leaks in our project
    -  ```valgrind ./hsh```
 
