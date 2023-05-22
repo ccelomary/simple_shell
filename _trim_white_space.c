@@ -92,13 +92,20 @@ char *_trim_white_space(const char *line)
 	char *s;
 
 	left = 0;
-	right = _strlen(line) - 1;
+	right = _strlen(line);
+	if (!right)
+	{
+		s = malloc(sizeof(char));
+		*s = 0;
+		return (s);
+	}
+	right -= 1;
 	while (line[left] == ' ' || line[left] == '\t')
 		left++;
 	while (right > left &&
 		   (line[right] == ' ' || line[right] == '\t'))
 		right--;
-	if (left >= right)
+	if (left > right)
 	{
 		s = malloc(sizeof(char));
 		*s = 0;
