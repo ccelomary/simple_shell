@@ -32,6 +32,7 @@ int _semicolon_handler(const char *line)
 			_excute(command);
 		else
 		{
+			_global_states(SET_2D, semi_commands);
 			_status_management(UPDATE_STATUS,
 							   _builtin_management(
 								   GET_BUILTIN,

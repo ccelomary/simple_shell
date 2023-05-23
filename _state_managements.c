@@ -101,15 +101,15 @@ builtins_t _builtin_management(builtin_actions_t action, char *name,
  * @s: string to update string
  * Return: (void *)
  */
-void *_global_states(globals_action_t action, char *s)
+void *_global_states(globals_action_t action, char **s)
 {
-	static char *line, *shell_name;
+	static char *line, *shell_name, **array_2d;
 	static int line_number;
 
 	if (action == SET_LINE)
-		line = s;
+		line = *s;
 	if (action == SET_SHELL_NAME)
-		shell_name = s;
+		shell_name = *s;
 	if (action == GET_LINE)
 		return (line);
 	if (action == GET_SHELL_NAME)
@@ -118,5 +118,9 @@ void *_global_states(globals_action_t action, char *s)
 		return (&line_number);
 	if (action == INCREMENT_LINE_NUMBER)
 		line_number++;
+	if (action == SET_2D)
+		array_2d = s;
+	if (action == GET_2D)
+		return (array_2d);
 	return (NULL);
 }

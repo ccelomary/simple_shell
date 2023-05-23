@@ -157,6 +157,8 @@ typedef enum enviroment_action_e
  * shell name
  * @INCREMENT_LINE_NUMBER: action to increment
  * line number by one
+ * @SET_2D: action that set 2d array
+ * @GET_2D: action that get 2d array
  */
 typedef enum globals_action_e
 {
@@ -165,7 +167,9 @@ typedef enum globals_action_e
 	GET_SHELL_NAME,
 	SET_LINE,
 	SET_SHELL_NAME,
-	INCREMENT_LINE_NUMBER
+	INCREMENT_LINE_NUMBER,
+	SET_2D,
+	GET_2D
 } globals_action_t;
 
 typedef int (*builtins_t)(command_t *);
@@ -222,7 +226,7 @@ void _excute(command_t *command);
 int _setenv(command_t *command);
 int _unsetenv(command_t *command);
 int _fprint(int fd, const char *format, ...);
-void *_global_states(globals_action_t action, char *s);
+void *_global_states(globals_action_t action, char **s);
 int _cd(command_t *command);
 void _handle_sigint(int sig);
 void _prompt(void);

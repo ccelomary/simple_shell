@@ -21,7 +21,7 @@ int main(int ac, char *av[], char **env)
 	_builtin_management(SET_BUILTIN, "setenv", _setenv);
 	_builtin_management(SET_BUILTIN, "unsetenv", _unsetenv);
 	_builtin_management(SET_BUILTIN, "cd", _cd);
-	_global_states(SET_SHELL_NAME, av[0]);
+	_global_states(SET_SHELL_NAME, &av[0]);
 	while (1)
 	{
 		_prompt();
@@ -37,7 +37,7 @@ int main(int ac, char *av[], char **env)
 		no_comment_line = _exclude_comment(line);
 		free(line);
 		line = no_comment_line;
-		_global_states(SET_LINE, line);
+		_global_states(SET_LINE, &line);
 		_global_states(INCREMENT_LINE_NUMBER, NULL);
 		_semicolon_handler(line);
 		free(line);
