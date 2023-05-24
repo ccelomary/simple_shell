@@ -14,7 +14,7 @@ int __exit(command_t *command)
 	int len;
 
 	iterator = command->arguments + 1;
-	len = _str2dlen(iterator);
+	len = _str2dlen(iterator + 1);
 	if (len > 0 && !_isdigit(*iterator))
 	{
 		_fprint(2, "%s: %d: exit: Illegal number: %s\n",
