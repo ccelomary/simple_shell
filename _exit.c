@@ -10,7 +10,9 @@
  */
 int __exit(command_t *command)
 {
-	(void)command;
+	_enviroment_management(CLEAR_ENV, NULL, NULL);
+	free(_global_states(GET_LINE, NULL));
+	_free_command(command);
 	_exit(0);
 	return (0);
 }
