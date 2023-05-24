@@ -26,12 +26,13 @@ void _free_command(void *data)
  */
 char *_lookup_for_command(char *command, command_type_t *type)
 {
-	_fprint(2, "here\n");
+
 	if (_builtin_management(GET_BUILTIN, command, NULL))
 	{
 		*type = BUILTINS;
 		return (_strdup(command));
 	}
+
 	return (_get_command_from_path(command));
 }
 /**

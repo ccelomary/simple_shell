@@ -17,12 +17,10 @@ char *_get_command_from_path(char *command)
 	if (!path)
 		return (_strdup(command));
 	iterator = path_2d = _split(path, ":");
-	_fprint(1, "%s\n", path);
 	while (*iterator)
 	{
 		path = _strcat(*iterator, "/");
 		proper_command = _strcat(path, command);
-		_fprint(2, "%s\n", proper_command);
 		free(path);
 		if (!stat(proper_command, &st))
 		{
