@@ -20,7 +20,7 @@ void _excute(command_t *command)
 		_free_command(command);
 		_free_split(&envs);
 		perror(_global_states(GET_SHELL_NAME, NULL));
-		exit(errno);
+		_exit(errno);
 	}
 	else
 	{
