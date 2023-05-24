@@ -13,17 +13,16 @@ char *_get_command_from_path(char *command)
 		**path_2d, **iterator;
 	struct stat st;
 
-	if (!stat(command, &st))
-		return (_strdup(command));
 	path = _enviroment_management(GET_VALUE, "PATH", NULL);
 	if (!path)
 		return (_strdup(command));
 	iterator = path_2d = _split(path, ":");
-	free(path);
+	_fprint(1, "%s\n", path);
 	while (*iterator)
 	{
 		path = _strcat(*iterator, "/");
 		proper_command = _strcat(path, command);
+		_fprint(2, "%s\n", proper_command);
 		free(path);
 		if (!stat(proper_command, &st))
 		{
