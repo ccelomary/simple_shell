@@ -13,7 +13,8 @@ char *_get_command_from_path(char *command)
 		**path_2d, **iterator;
 	struct stat st;
 
-	if (!stat(command, &st))
+	if ((command[0] == '.' || command[0] == '/') &&
+		!stat(command, &st))
 		return (_strdup(command));
 	path = _enviroment_management(GET_VALUE, "PATH", NULL);
 	if (!path)

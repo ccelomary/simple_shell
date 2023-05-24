@@ -57,6 +57,7 @@ command_t *_init_command(char **tokens)
 	free(tokens[0]);
 	tokens[0] = scommand;
 	if (command->type == NOT_FOUND &&
+		(tokens[0][0] == '.' || tokens[0][0] == '/') &&
 		!stat(tokens[0], &st))
 		command->type = EXTERNAL;
 	command->arguments = tokens;
