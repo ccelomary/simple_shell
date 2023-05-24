@@ -5,17 +5,16 @@
  *
  * @ac: number of passed arguments
  * @av: arguments
- * @env: enviroment variables
  * Return: 0 sucess, otherwise error
  */
-int main(int ac, char *av[], char **env)
+int main(int ac, char *av[])
 {
 	char *line, *no_comment_line;
 
 	(void)ac;
 	signal(SIGINT, _handle_sigint);
 	_enviroment_management(INIT_ENV, NULL, NULL);
-	_feed_enviroment_variable(env);
+	_feed_enviroment_variable(__environ);
 	_builtin_management(SET_BUILTIN, "exit", __exit);
 	_builtin_management(SET_BUILTIN, "env", _env);
 	_builtin_management(SET_BUILTIN, "setenv", _setenv);
