@@ -27,17 +27,16 @@ int __exit(command_t *command)
 	{
 		_enviroment_management(CLEAR_ENV, NULL, NULL);
 		free(_global_states(GET_LINE, NULL));
-		write(1, "\n", 1);
 		iterator = _global_states(GET_2D, NULL);
 		_free_split(&iterator);
 		if (!len)
 		{
 			_free_command(command);
-			exit(0);
+			_exit(0);
 		}
 		len = _atoi(command->arguments[1]);
 		_free_command(command);
-		exit(len);
+		_exit(len);
 	}
 	return (0);
 }
