@@ -10,15 +10,12 @@
 void _excute(command_t *command)
 {
 	int pid, status;
-	char **envs;
 
 	pid = fork();
 	if (!pid)
 	{
-		envs = _enviroment_management(CONVERT_INTO_2D, NULL, NULL);
-		execve(command->name, command->arguments, envs);
+		execve(command->name, command->arguments, __environ);
 		_free_command(command);
-		_free_split(&envs);
 		perror(_global_states(GET_SHELL_NAME, NULL));
 		_exit(errno);
 	}
