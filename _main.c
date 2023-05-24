@@ -42,5 +42,5 @@ int main(int ac, char *av[])
 		free(line);
 	}
 	_enviroment_management(CLEAR_ENV, NULL, NULL);
-	return (0);
+	return (_status_management(GET_STATUS, 0));
 }
