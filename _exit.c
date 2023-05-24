@@ -32,7 +32,7 @@ int __exit(command_t *command)
 		if (!len)
 		{
 			_free_command(command);
-			_exit(errno);
+			_exit(0);
 		}
 		len = _atoi(command->arguments[1]);
 		_free_command(command);
