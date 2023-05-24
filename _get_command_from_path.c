@@ -19,6 +19,7 @@ char *_get_command_from_path(char *command)
 	if (!path)
 		return (_strdup(command));
 	iterator = path_2d = _split(path, ":");
+	free(path);
 	while (*iterator)
 	{
 		path = _strcat(*iterator, "/");
