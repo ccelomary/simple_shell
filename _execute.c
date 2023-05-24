@@ -9,22 +9,33 @@
  */
 void _excute(command_t *command)
 {
-	int pid, status;
-	char **s;
+	int pid, status, err;
 
 	pid = fork();
+	if (pid < 0)
+	{
+		perror((char *)_global_states(GET_SHELL_NAME, NULL));
+		_status_management(UPDATE_STATUS, 1);
+		return;
+	}
 	if (!pid)
 	{
 		execve(command->name, command->arguments, __environ);
-		_free_command(command);
-		s = _global_states(GET_2D, NULL);
-		_free_split(&s);
-		free(_global_states(GET_LINE, NULL));
-		perror(_global_states(GET_SHELL_NAME, NULL));
-		_enviroment_management(CLEAR_ENV, NULL, NULL);
+		err = errno;
 		if (errno == EACCES)
-			_exit(126);
-		_exit(errno);
+		{
+			_fprint(2, "%s: %d: %s: Permission denied\n",
+					(char *)_global_states(GET_SHELL_NAME, NULL),
+					*((int *)_global_states(GET_LINE_NUMBER, NULL)),
+					command->name);
+			err = 126;
+		}
+		else
+			perror(_global_states(GET_SHELL_NAME, NULL));
+		_free_command(command);
+		free(_global_states(GET_LINE, NULL));
+		_enviroment_management(CLEAR_ENV, NULL, NULL);
+		_exit(err);
 	}
 	else
 	{

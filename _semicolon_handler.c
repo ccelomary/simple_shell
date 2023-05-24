@@ -1,6 +1,27 @@
 #include "shell.h"
 
 /**
+ * _execution_handler - function that take command
+ * and execute it if command is file otherwise
+ * persmission and status is been set to (126)
+ *
+ * @command: command to be executed
+ * Return: Nothing
+ */
+void _execution_handler(command_t *command)
+{
+	if (access(command->name, F_OK | X_OK) != -1)
+		_excute(command);
+	else
+	{
+		_fprint(2, "%s: %d: %s: Permission denied\n",
+				(char *)_global_states(GET_SHELL_NAME, NULL),
+				*((int *)_global_states(GET_LINE_NUMBER, NULL)),
+				command->name);
+		_status_management(UPDATE_STATUS, 126);
+	}
+}
+/**
  * _semicolon_handler - function that splits given
  * line bu semicolon and pass the result to be
  * handled by other functions
@@ -29,7 +50,7 @@ int _semicolon_handler(const char *line)
 			_status_management(UPDATE_STATUS, 127);
 		}
 		else if (command->type == EXTERNAL)
-			_excute(command);
+			_execution_handler(command);
 		else
 		{
 			_global_states(SET_2D, semi_commands);
