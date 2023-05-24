@@ -10,11 +10,11 @@
  */
 int _env(command_t *command)
 {
-	char **envs, **iterator;
+	char **iterator;
 
 	(void)command;
 
-	iterator = envs = _enviroment_management(CONVERT_INTO_2D, NULL, NULL);
+	iterator = __environ;
 	if (!iterator)
 		return (1);
 	while (*iterator)
@@ -22,6 +22,5 @@ int _env(command_t *command)
 		_fprint(1, "%s\n", *iterator);
 		iterator++;
 	}
-	_free_split(&envs);
 	return (0);
 }
