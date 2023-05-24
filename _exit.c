@@ -27,6 +27,7 @@ int __exit(command_t *command)
 	{
 		_enviroment_management(CLEAR_ENV, NULL, NULL);
 		free(_global_states(GET_LINE, NULL));
+		write(1, "\n", 1);
 		iterator = _global_states(GET_2D, NULL);
 		_free_split(&iterator);
 		if (!len)
